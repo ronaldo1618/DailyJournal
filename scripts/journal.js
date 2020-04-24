@@ -1,25 +1,18 @@
-const journalEntries = [
-    {
-        date: "4/19/2020",
-        concept: "Query selection",
-        entry: "Just reading ahead a bit.",
-        mood: "Determined"
-    },
-    {
-        date: "4/20/2020",
-        concept: "DOM API manipulation",
-        entry: "Trying to grasp this concept. Read up more",
-        mood: "Happy"
-    },
-    {
-        date: "4/20/2020",
-        concept: "Static HTML",
-        entry: "Trying to grasp this concept. Read up more",
-        mood: "Happy"
-    }    
-]
+// Daily Journal 4
 
+fetch("http://localhost:3000/journalEntries")
+    .then(entries => entries.json())
+    .then(entries => {
+        entries.forEach(entry => {
+            const jeAsHTML = makeJournalEntryComponent(entry)
+            renderJournalEntries(jeAsHTML)
+        });
+    })
+    .catch(error => {
+        console.error("fetch error", error)
+    });
 
+// HTML string template
 const makeJournalEntryComponent = (journalEntry) => {
     return `
     <div>
@@ -29,13 +22,7 @@ const makeJournalEntryComponent = (journalEntry) => {
     `
 }
 
-const renderJournalEntries = (entries) => {
-    const entryContainer = document.querySelector(".entryLog")
-    for (let i = 0; i < entries.length; i++) {
-        const entry = entries[i];
-        entryContainer.innerHTML += makeJournalEntryComponent(entry)
-        
-    }
+// Accessing DOM for entryLog
+const renderJournalEntries = (entry) => {
+    document.querySelector(".entryLog").innerHTML += entry
 }
-
-renderJournalEntries(journalEntries)
