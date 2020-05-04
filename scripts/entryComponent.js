@@ -6,3 +6,5 @@ const makeEntry = {
         `
     }
 }
+
+export default makeEntry;

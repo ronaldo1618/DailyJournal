@@ -4,3 +4,5 @@ const API = {
             .then(entries => entries.json())
     }
 }
+
+export default API;
